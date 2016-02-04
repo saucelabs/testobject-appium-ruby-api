@@ -2,7 +2,7 @@ require 'json'
 require_relative './appium_resource.rb'
 require_relative './rest_client.rb'
 
-class TestWatcher
+class TestObjectTestResultWatcher
 
   def initialize(desired_capabilities, driver)
     @desired_capabilities = desired_capabilities

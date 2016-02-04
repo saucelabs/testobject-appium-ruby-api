@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'mocha/test_unit'
-require_relative '../test-result-watcher/appium_resource.rb'
+require 'test_object_test_result_watcher'
 
 class TestAppiumResource < Test::Unit::TestCase
   def test_update_test_report_status

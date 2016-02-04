@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'mocha/test_unit'
-require_relative '../test-result-watcher/rest_client.rb'
+require 'test_object_test_result_watcher'
 
 class TestRestClient < Test::Unit::TestCase
 

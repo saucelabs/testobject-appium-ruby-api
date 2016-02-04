@@ -1,9 +1,9 @@
 require 'test/unit'
 require 'mocha/test_unit'
 require 'appium_lib'
-load '../test-result-watcher/test_watcher.rb'
+require 'test_object_test_result_watcher'
 
-class TestTestWatcher < Test::Unit::TestCase
+class TestTestObjectTestResultWatcher < Test::Unit::TestCase
   def setup
     @driver = Object.new
     @driver.stubs(:session_id).returns("my_session_id")
@@ -23,7 +23,7 @@ class TestTestWatcher < Test::Unit::TestCase
             wait: 10
         }
     }
-    @test_watcher = TestWatcher.new(@desired_capabilities, @driver)
+    @test_watcher = TestObjectTestResultWatcher.new(@desired_capabilities, @driver)
   end
 
   def test_base_url

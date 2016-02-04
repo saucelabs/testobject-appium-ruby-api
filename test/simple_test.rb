@@ -1,6 +1,6 @@
 require 'appium_lib'
 require 'test/unit'
-require_relative '../test-result-watcher/test_watcher.rb'
+require 'test_object_test_result_watcher'
 
 class LoginTest < Test::Unit::TestCase
 
@@ -24,9 +24,10 @@ class LoginTest < Test::Unit::TestCase
 
   def setup
     @driver = Appium::Driver.new(desired_capabilities).start_driver
-    @testwatcher = TestWatcher.new(desired_capabilities, @driver)
+    @testwatcher = TestObjectTestResultWatcher.new(desired_capabilities, @driver)
   end
 
+  #Test against Komoot app
   def test_login_with_invalid_credentials
     @driver.find_element(:id, 'de.komoot.android:id/button_mail_login').click
     @driver.find_element(:id, 'de.komoot.android:id/txt_user_name').send_keys("jfjfkdl")
