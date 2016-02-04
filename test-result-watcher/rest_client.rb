@@ -3,12 +3,12 @@ require 'json'
 
 class RestClient
   def initialize(parameters)
-    @base_url = parameters[:base_url]
+    @api_url = parameters[:api_url]
     @api_key = parameters[:api_key]
   end
 
   def build_path(session_id)
-    @path = "#{@base_url}session/#{session_id}/test/"
+    @path = "#{@api_url}session/#{session_id}/test/"
   end
 
   def put_test_outcome(outcome)

@@ -4,25 +4,28 @@ require_relative '../test-result-watcher/test_watcher.rb'
 
 class LoginTest < Test::Unit::TestCase
 
+  def desired_capabilities
+      {
+          caps:       {
+              #Read API key from environment variable.
+              #Alternatively, you can just write the string here
+              testobject_api_key: ENV['TESTOBJECT_API_KEY'],
+
+              testobject_app_id: '1',
+              testobject_device: 'HTC_Nexus_9_real',
+              testobject_base_url: 'https://app.testobject.com:443',
+              report_results: true
+          },
+          appium_lib: {
+              server_url: 'https://app.testobject.com:443/api/appium/wd/hub',
+              wait: 10
+          }
+      }
+  end
 
   def setup
-    desired_caps = {
-        caps:       {
-            #Read API key from environment variable.
-            #Alternatively, you can just write the string here
-            testobject_api_key: ENV['TESTOBJECT_API_KEY'],
-
-            testobject_app_id: '1',
-            testobject_device: 'HTC_Nexus_9_real'
-        },
-        appium_lib: {
-            server_url: 'https://app.testobject.com:443/api/appium/wd/hub',
-            wait: 10
-        }
-    }
-
-    # Start the driver
-    @driver = Appium::Driver.new(desired_caps).start_driver
+    @driver = Appium::Driver.new(desired_capabilities).start_driver
+    @testwatcher = TestWatcher.new(desired_capabilities, @driver)
   end
 
   def test_login_with_invalid_credentials
@@ -39,6 +42,6 @@ class LoginTest < Test::Unit::TestCase
   end
 
   def teardown
-    @driver.quit
+    @testwatcher.report_results_and_cleanup(passed?)
   end
 end
