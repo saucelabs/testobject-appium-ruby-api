@@ -13,8 +13,7 @@ class LoginTest < Test::Unit::TestCase
 
               testobject_app_id: '1',
               testobject_device: 'HTC_Nexus_9_real',
-              testobject_base_url: 'https://app.testobject.com:443',
-              report_results: true
+              testobject_report_results: true
           },
           appium_lib: {
               server_url: 'https://app.testobject.com:443/api/appium/wd/hub',

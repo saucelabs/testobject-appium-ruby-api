@@ -16,8 +16,7 @@ class TestTestWatcher < Test::Unit::TestCase
 
             testobject_app_id: '1',
             testobject_device: 'HTC_Nexus_9_real',
-            testobject_base_url: 'https://app.testobject.com:443',
-            send_results: true
+            testobject_report_results: true
         },
         appium_lib: {
             server_url: 'https://app.testobject.com:443/api/appium/wd/hub',
@@ -27,20 +26,14 @@ class TestTestWatcher < Test::Unit::TestCase
     @test_watcher = TestWatcher.new(@desired_capabilities, @driver)
   end
 
-  def test_report_results
-    @test_watcher.expects(:update_or_create_suite_report)
-    @test_watcher.report_results
+  def test_base_url
+    assert_equal("http://www.testobject.com", @test_watcher.base_url("http://www.testobject.com"))
+    assert_equal("http://app.testobject.com:433", @test_watcher.base_url("http://app.testobject.com:433/extra/relative_url/"))
   end
 
-  def test_update_or_create_suite_report_with_no_suite_report
-    @test_watcher.instance_variable_set(:@suite_report, nil)
-    @test_watcher.expects(:create_suite_report)
-    @test_watcher.update_or_create_suite_report
-  end
-
-  def test_update_or_create_suite_report_with_existing_suite_report
-    @test_watcher.instance_variable_set(:@suite_report, 1)
-    @test_watcher.expects(:update_suite_report)
-    @test_watcher.update_or_create_suite_report
+  def test_report_results_and_cleanup_quits_driver
+    @driver.expects(:quit)
+    @test_watcher.stubs(:report_results).returns()
+    @test_watcher.report_results_and_cleanup(true)
   end
 end
