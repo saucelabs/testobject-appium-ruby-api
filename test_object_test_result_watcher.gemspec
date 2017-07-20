@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name      = 'testobject_test_result_watcher'
+  s.name      = 'test_object_test_result_watcher'
   s.version   = '1.0.0'
   s.date      = '2017-07-20'
   s.summary   = 'Record your Appium test results on TestObject'
