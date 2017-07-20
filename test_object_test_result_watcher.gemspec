@@ -8,5 +8,4 @@ Gem::Specification.new do |s|
   s.homepage  = 'http://www.testobject.com'
   s.authors   = ['TestObject']
   s.add_runtime_dependency 'httparty',  '~> 0.13'
-  s.add_runtime_dependency 'appium_lib',  '~> 8.0'
 end
