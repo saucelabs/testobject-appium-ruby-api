@@ -7,6 +7,5 @@ Gem::Specification.new do |s|
   s.files     = ['lib/appium_resource.rb', 'lib/test_object_test_result_watcher.rb', 'lib/rest_client.rb']
   s.homepage  = 'http://www.testobject.com'
   s.authors   = ['TestObject']
-  s.add_runtime_dependency 'appium_lib', '~> 8.0'
   s.add_runtime_dependency 'httparty',  '~> 0.13'
 end
