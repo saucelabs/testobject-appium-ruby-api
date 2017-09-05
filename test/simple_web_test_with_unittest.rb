@@ -1,6 +1,6 @@
 require 'appium_lib'
 require 'test-unit'
-require_relative '../lib/test_object_test_result_watcher'
+require 'test_object_test_result_watcher'
 
 class SimpleWebTest < Test::Unit::TestCase
 
