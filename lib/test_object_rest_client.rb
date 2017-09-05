@@ -1,7 +1,8 @@
 require 'httparty'
 require 'json'
 
-class RestClient
+class TestObjectRestClient
+
   def initialize(parameters)
     @api_url = parameters[:api_url]
     @api_key = parameters[:api_key]
@@ -16,10 +17,11 @@ class RestClient
   end
 
   def basic_authorization
-    {username: @api_key, password: ""}
+    { username: @api_key, password: '' }
   end
 
   def headers
-    { "Content-Type" => "application/json"}
+    { 'Content-Type' => 'application/json' }
   end
+
 end

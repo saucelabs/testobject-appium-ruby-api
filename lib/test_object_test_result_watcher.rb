@@ -1,35 +1,32 @@
 require 'json'
-require_relative './appium_resource.rb'
-require_relative './rest_client.rb'
+require_relative 'appium_resource.rb'
+require_relative 'test_object_rest_client'
 
 class TestObjectTestResultWatcher
-
   def initialize(desired_capabilities, driver)
     @desired_capabilities = desired_capabilities
     @driver = driver
     @report_results = @desired_capabilities[:caps][:testobject_report_results]
-    if @report_results
-      set_client
-    end
+    set_client if @report_results
   end
 
   def set_client
-    relative_url = "/api/rest/appium/v1/"
-    base_url = base_url(@desired_capabilities[:appium_lib][:server_url])
+    rest_api_url = 'https://app.testobject.com/api/rest/v2/appium/'
     testobject_api_key = @desired_capabilities[:caps][:testobject_api_key]
-    api_url = base_url + relative_url
-    @client = RestClient.new(api_url: api_url, api_key: testobject_api_key)
-  end
-
-  def base_url(server_url)
-    server_url.match(/^https?:\/\/(www.)?\S+.com(:\d+)?/)[0]
+    @client = TestObjectRestClient.new(api_url: rest_api_url, api_key: testobject_api_key)
   end
 
   def report_results_and_cleanup(passed)
-    if @report_results
-      report_results(passed)
+    report_results(passed) if @report_results
+    begin
+      @driver.quit
+    rescue
+      begin
+        @driver.driver_quit
+      rescue
+        # ignored
+      end
     end
-    @driver.quit
   end
 
   def report_results(passed)

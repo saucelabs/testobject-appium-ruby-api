@@ -4,36 +4,29 @@ require 'appium_lib'
 require 'test_object_test_result_watcher'
 
 class TestTestObjectTestResultWatcher < Test::Unit::TestCase
+
   def setup
     @driver = Object.new
-    @driver.stubs(:session_id).returns("my_session_id")
-    @driver.stubs(:quit).returns()
+    @driver.stubs(:session_id).returns('my_session_id')
+    @driver.stubs(:quit).returns
     @desired_capabilities = {
-        caps:       {
-            #Read API key from environment variable.
-            #Alternatively, you can just write the string here
-            testobject_api_key: ENV['TESTOBJECT_API_KEY'],
-
-            testobject_app_id: '1',
-            testobject_device: 'HTC_Nexus_9_real',
-            testobject_report_results: true
-        },
-        appium_lib: {
-            server_url: 'https://app.testobject.com:443/api/appium/wd/hub',
-            wait: 10
-        }
+      caps: {
+        testobject_api_key: ENV['TESTOBJECT_API_KEY'],
+        platformName: 'Android',
+        testobject_report_results: true
+      },
+      appium_lib: {
+        server_url: 'https://eu1.appium.testobject.com/wd/hub',
+        wait: 10
+      }
     }
     @test_watcher = TestObjectTestResultWatcher.new(@desired_capabilities, @driver)
   end
 
-  def test_base_url
-    assert_equal("http://www.testobject.com", @test_watcher.base_url("http://www.testobject.com"))
-    assert_equal("http://app.testobject.com:433", @test_watcher.base_url("http://app.testobject.com:433/extra/relative_url/"))
-  end
-
   def test_report_results_and_cleanup_quits_driver
     @driver.expects(:quit)
-    @test_watcher.stubs(:report_results).returns()
+    @test_watcher.stubs(:report_results).returns
     @test_watcher.report_results_and_cleanup(true)
   end
+
 end
