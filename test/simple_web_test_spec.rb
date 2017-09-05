@@ -1,7 +1,7 @@
 require 'rspec'
 require 'rspec/expectations'
 require 'appium_lib'
-require_relative 'test_object_test_result_watcher'
+require 'test_object_test_result_watcher'
 
 def desired_capabilities
   {
