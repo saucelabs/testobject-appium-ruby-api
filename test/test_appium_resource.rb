@@ -11,9 +11,9 @@ class TestAppiumResource < Test::Unit::TestCase
   end
 
   def generate_client
-    client = Object.new()
-    client.stubs(:build_path).returns()
-    client.stubs(:put_test_outcome).returns()
+    client = Object.new
+    client.stubs(:build_path).returns
+    client.stubs(:put_test_outcome).returns
     client
   end
 end

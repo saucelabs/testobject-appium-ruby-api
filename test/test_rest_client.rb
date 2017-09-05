@@ -27,4 +27,5 @@ class TestRestClient < Test::Unit::TestCase
     expected_header = {"Content-Type" => "application/json"}
     assert_equal(expected_header, @client.headers)
   end
+
 end
